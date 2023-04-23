@@ -1,16 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import SignOutButton from "@/components/auth/signOutButton";
-import Link from "next/link";
+import SignUpForm from "@/components/auth/signUpForm";
+import { Pin } from "@/types/pin";
+import { getAllPins } from "@/utils/sanity/pin";
 
-export default function Home() {
+export const getStaticProps = async (): Promise<{
+    props: { pins: Pin[] };
+}> => {
+    const pins = await getAllPins();
+
+    return {
+        props: { pins },
+    };
+};
+
+export default function Pins() {
     return (
-        <main>
-            <Link href="/login">
-                <p>Sign In</p>
-            </Link>
+        <div>
+            pins goes here
 
-            <SignOutButton />
-
-        </main>
+            <SignUpForm />
+        </div>
     );
 }
