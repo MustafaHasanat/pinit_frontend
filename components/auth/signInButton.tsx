@@ -1,15 +1,14 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 // import { client } from "@/utils/client";
 
 const SignInButton = () => {
     const { data: session } = useSession();
 
     const signInHandler = () => {
-        // signIn("google", { callbackUrl: "http://localhost:3000" }).then(() => {
-        //     console.log(session);
-        // });
+        signIn()
 
         // const data = {
         //     _id: "",
@@ -33,6 +32,11 @@ const SignInButton = () => {
         //     }
         // );
     };
+
+    // useEffect(() => {
+    //   console.log(session);
+    // }, [session])
+    
 
     return (
         <button

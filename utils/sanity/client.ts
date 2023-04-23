@@ -8,6 +8,3 @@ export const client = createClient({
     apiVersion: "2023-04-01",
     token: process.env.SANITY_APP_TOKEN,
 });
-
-// const builder = imageUrlBuilder(client);
-// export const urlFor = (source) => builder.image(source);

@@ -1,10 +1,7 @@
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import SignInButton from "@/components/auth/signInButton";
 
 export default function Login() {
-    const { data: session, status } = useSession();
-
     return (
         <main className="flex justify-start items-center flex-col h-screen">
             <div className="relative w-full h-full">
