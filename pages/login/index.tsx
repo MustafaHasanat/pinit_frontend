@@ -1,39 +1,35 @@
-import Image from "next/image";
+import AuthTemplate from "@/components/auth/authTemplate";
 import SignInButton from "@/components/auth/signInButton";
+import SignOutButton from "@/components/auth/signOutButton";
+import LogoBlock from "@/components/widgets/logoBlock";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
+    const { data: session, status } = useSession();
+    
     return (
-        <main className="flex justify-start items-center flex-col h-screen">
-            <div className="relative w-full h-full">
-                <video
-                    className="w-full h-full object-cover"
-                    src="videos/phoneTyping.mp4"
-                    loop
-                    controls={false}
-                    muted
-                    autoPlay
-                />
+        <AuthTemplate>
+            <div className="w-fit text-white">
+                <LogoBlock size={50} />
 
-                <div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay">
-                    <div className="w-fit">
-                        <div className="flex justify-center items-center w-60 p-4 gap-2">
-                            <Image
-                                src="/images/logo.png"
-                                alt="logo"
-                                width={50}
-                                height={50}
-                            />
-                            <p className="uppercase text-white text-4xl">
-                                pinit
-                            </p>
-                        </div>
-
-                        <div className="flex flex-col justify-center items-center  bg-white p-4 rounded-lg">
-                            <SignInButton />
-                        </div>
-                    </div>
+                <div className="flex flex-col justify-center items-center text-black bg-white p-4 rounded-lg">
+                    <SignInButton text="Sign in with Google" />
                 </div>
             </div>
-        </main>
+
+            <div className="flex flex-row text-white gap-2 p-5">
+                <p>{"Don't have an account?"}</p>
+
+                <Link href="/signup" className="font-bold">
+                    Create new one
+                </Link>
+            </div>
+
+            <div className="text-white">
+                <SignOutButton />
+                {status}
+            </div>
+        </AuthTemplate>
     );
 }

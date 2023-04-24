@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Pin } from "@/types/pin";
 import { getAllPins, getPinById } from "@/utils/sanity/pin";
-import PinTemplate from "@/components/pinTemplate";
+import PinTemplate from "@/components/widgets/pinTemplate";
 
 export const getStaticPaths = async () => {
     const pins = await getAllPins();

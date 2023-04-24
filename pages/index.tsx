@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import SignUpForm from "@/components/auth/signUpForm";
 import { Pin } from "@/types/pin";
 import { getAllPins } from "@/utils/sanity/pin";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { navbarActions } from "@/utils/store";
+import Navbar from "@/components/containers/navbar";
 
 export const getStaticProps = async (): Promise<{
     props: { pins: Pin[] };
@@ -14,11 +17,17 @@ export const getStaticProps = async (): Promise<{
 };
 
 export default function Pins() {
-    return (
-        <div>
-            pins goes here
+    const dispatch = useDispatch();
 
-            <SignUpForm />
+    return (
+        <div className="px-2 md:px-5">
+            <div className="bg-gray-50">
+                <Navbar />
+            </div>
+
+            <div className="h-full">
+                
+            </div>
         </div>
     );
 }

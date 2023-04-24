@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import UserProfile from "@/components/containers/userProfile";
 import { User } from "@/types/user";
 import { getAllUsers, getUserById } from "@/utils/sanity/user";
-import { UserProfile } from "@/components";
 
 export const getStaticPaths = async () => {
     const users = await getAllUsers();

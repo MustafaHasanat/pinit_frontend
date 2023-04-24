@@ -1,7 +1,9 @@
-import Layout from "@/components/layout";
+import Layout from "@/components/containers/layout";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import store from "@/utils/store";
+import { Provider } from "react-redux";
 
 export default function App({
     Component,
@@ -9,9 +11,11 @@ export default function App({
 }: AppProps) {
     return (
         <SessionProvider session={session}>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <Provider store={store}>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </Provider>
         </SessionProvider>
     );
 }

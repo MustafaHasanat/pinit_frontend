@@ -6,11 +6,13 @@ export default async function postUser(req: any, res: any) {
     try {
         await client.create({
             _type: "user",
-            post: {
-                _type: "reference",
-            },
             userName,
             email,
+            // avatar: {
+            //     asset: {
+            //         url: avatar,
+            //     },
+            // },
         });
     } catch (err) {
         console.error(err);

@@ -10,7 +10,7 @@ const SignOutButton = () => {
             onClick={() => {
                 signOutHandler();
             }}
-            className="flex w-full h-full justify-around items-center"
+            className="flex justify-around items-center"
         >
             <p>Sign out</p>
         </button>

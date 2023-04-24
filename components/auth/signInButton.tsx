@@ -1,52 +1,49 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useSession } from "next-auth/react";
+import { createUser, getUserByEmail } from "@/utils/sanity/user";
+import { client } from "@/utils/sanity/client";
 import { useEffect } from "react";
-// import { client } from "@/utils/client";
+import { useRouter } from "next/router";
 
-const SignInButton = () => {
-    const { data: session } = useSession();
+const SignInButton = ({ text }: { text: string }) => {
+    const { data: session, status } = useSession();
+    const router = useRouter();
 
     const signInHandler = () => {
-        signIn()
-
-        // const data = {
-        //     _id: "",
-        //     _type: "user",
-        //     userName: session?.user?.name,
-        //     email: session?.user?.email,
-        //     avatar: session?.user?.image,
-        // };
-
-       
-
-        // client.fetch(
-        //     `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${process.env.SANITY_DATASET}`,
-        //     {
-        //         method: "post",
-        //         headers: {
-        //             "Content-type": "application/json",
-        //             Authorization: `Bearer ${tokenWithWriteAccess}`,
-        //         },
-        //         body: JSON.stringify({ doc }),
-        //     }
-        // );
+        signIn();
     };
 
-    // useEffect(() => {
-    //   console.log(session);
-    // }, [session])
-    
+    useEffect(() => {
+        const signInMock = async () => {
+            if (session && session.user) {
+                const user = await getUserByEmail(`${session.user.email}`);
+
+                console.log("=======");
+                console.log(user);
+
+                if (user === undefined) {
+                    // create one in sanity
+                    await createUser(
+                        `${session.user.name}`,
+                        `${session.user.email}`
+                    );
+                }
+            }
+        };
+        signInMock();
+    }, [session]);
 
     return (
         <button
             onClick={() => {
                 signInHandler();
             }}
-            className="flex w-full h-full justify-around items-center"
+            className="flex w-full h-full justify-around items-center gap-3"
         >
             <FcGoogle size={30} />
-            <p>Sign in with Google</p>
+            <p>{text}</p>
         </button>
     );
 };
